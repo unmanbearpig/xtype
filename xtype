@@ -127,6 +127,8 @@ CHAR_NAME:
 	§  - section
 	§  - division
 	…  - ellipsis | hellip
+	⋆  - Star
+	⋅  - sdot
 	′  - prime
 	″  - Prime | dprime
 	‴  - tprime
@@ -512,6 +514,12 @@ case $1 in
 	ellipsis | hellip)
 		out="…"
 		;;
+	Star)
+		out="⋆"
+		;;
+	sdot)
+		out="⋅"
+		;;
 	prime)
 		out="′"
 		;;
@@ -582,7 +590,8 @@ esac
 
 if [ "$out" == "" ]; then 
 	echo "invalid argument $1
-use \"help\" for list of characters and their names"
+Help:"
+	print_help
 	exit 1
 fi
 
