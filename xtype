@@ -187,10 +187,10 @@ case $1 in
 	Yuml)
 		out="Ÿ"
 		;;
-	eszett | ss)
+	eszett | eszet | ss)
 		out="ß"
 		;;
-	Eszett | SS)
+	Eszett | Eszet | SS)
 		out="ẞ"
 		;;
 	eur | euro)
