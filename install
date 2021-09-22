@@ -1,4 +1,0 @@
-#!/bin/sh
-
-doas cp xtype /usr/local/bin/xtype
-doas chmod a+rx /usr/local/bin/xtype
