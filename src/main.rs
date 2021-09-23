@@ -23,7 +23,8 @@ fn print_dmenu_mappings<'a, 'b>(
 }
 
 fn print_help() {
-    println!("
+    println!(
+        "
 xtype [OPTION] [CHAR_NAME]
 
 xtype  — Outputs weird unicode characters
@@ -36,7 +37,8 @@ OPTIONS:
 CHAR_NAME:
   Alias for the character to print out.
   If multiple aliases are provided the first one is used.
-  Invalid aliases are ignored.");
+  Invalid aliases are ignored."
+    );
 }
 
 fn main() {
@@ -49,7 +51,7 @@ fn main() {
                 "--help" => {
                     print_help();
                     process::exit(0);
-                },
+                }
                 "--list" => {
                     print_mappings(DICT.iter());
                     process::exit(0);
@@ -57,25 +59,24 @@ fn main() {
                 "--dmenu-list" => {
                     print_dmenu_mappings(DICT.iter());
                     process::exit(0);
-                },
+                }
                 _ => {
-                    eprintln!(
-                        "Invalid argument \"{}\", use --help for valid options",
-                        arg);
+                    eprintln!("Invalid argument \"{}\", \
+use --help for valid options", arg);
                     process::exit(1);
                 }
             }
         }
 
-        let arg = arg.trim_end_matches(":");
-
+        let arg = arg.trim_end_matches(':');
         for map in DICT.iter() {
-            if map.1.contains(&arg.as_ref()) {
+            if map.1.contains(&arg) {
+                // Found match. Print it ignoring other arguments
                 print!("{}", map.0);
                 process::exit(0);
             }
         }
     }
-    eprintln!("Could not find any symbols");
+    eprintln!("Could not find any character aliases");
     process::exit(1);
 }

@@ -1,6 +1,6 @@
 use std::fmt;
 
-#[derive(Debug, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Debug)]
 pub struct Mapping<'a>(pub &'a str, pub &'a [&'a str]);
 
 impl fmt::Display for Mapping<'_> {
@@ -11,10 +11,12 @@ impl fmt::Display for Mapping<'_> {
 }
 
 #[test]
+/// Make sure there are no duplicate characters and duplicate aliases in our
+/// dictionary
 fn test_no_dups_in_dict() {
     use std::collections::BTreeMap;
     let mut by_alias: BTreeMap<&str, Vec<&Mapping>> = BTreeMap::new();
-    let mut by_char:  BTreeMap<&str, Vec<&Mapping>> = BTreeMap::new();
+    let mut by_char: BTreeMap<&str, Vec<&Mapping>> = BTreeMap::new();
 
     for map in DICT.iter() {
         if let Some(m) = by_char.get_mut(map.0) {
@@ -34,18 +36,24 @@ fn test_no_dups_in_dict() {
 
     let mut err = String::new();
     for (ch, maps) in by_char.iter() {
-        if maps.len() == 0 { unreachable!("whaat"); }
+        if maps.len() == 0 {
+            unreachable!("whaat");
+        }
         if maps.len() > 1 {
-            err.push_str(format!("Multiple maps for char \"{}\": {:?}\n",
-                                 ch, maps).as_ref());
+            err.push_str(
+                format!("Multiple maps for char \"{}\": {:?}\n", ch, maps)
+                .as_ref());
         }
     }
 
     for (alias, maps) in by_alias.iter() {
-        if maps.len() == 0 { unreachable!("whaat"); }
+        if maps.len() == 0 {
+            unreachable!("whaat");
+        }
         if maps.len() > 1 {
-            err.push_str(format!("Multiple maps for alias \"{}\": {:?}\n",
-                                 alias, maps).as_ref());
+            err.push_str(
+                format!("Multiple maps for alias \"{}\": {:?}\n", alias, maps)
+                .as_ref());
         }
     }
 
@@ -54,6 +62,7 @@ fn test_no_dups_in_dict() {
     }
 }
 
+/// "Database" of our characters and their aliases in no particular order
 pub const DICT: &[Mapping] = &[
     Mapping("¨", &["uml", "umlaut"]),
     Mapping("ä", &["auml", "aumlaut"]),
