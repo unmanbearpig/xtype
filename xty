@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+if [ $1 = "--help" ]; then
+	printf '%s' \
+"xty
+
+Launches dmenu with the list of available characters from xtype and their
+aliases and prints the selected character into the current window
+
+Requires: xtype, xdotool, dmenu
+"
+	exit 0
+fi
+
+# xdotool delay is important. It often doesn't work on my machine with
+# default delay or delay 50 or less, haven't tried between 50 and 100, but
+# 100 works every time
+xtype --dmenu-list | \
+	xdotool type --clearmodifiers --delay 100 $(xtype $(dmenu))
