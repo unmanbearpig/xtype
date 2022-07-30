@@ -132,7 +132,7 @@ pub const DICT: &[Mapping] = &[
     Mapping("♯", &["sharp"]),
     Mapping("♮", &["natural"]),
     Mapping("✓", &["check"]),
-    Mapping("✗", &["cross"]),
+    Mapping("✗", &["cross", "x"]),
     Mapping("µ", &["micro"]),
     Mapping("—", &["mdash"]),
     Mapping("–", &["ndash"]),
