@@ -64,6 +64,8 @@ fn test_no_dups_in_dict() {
 
 /// "Database" of our characters and their aliases in no particular order
 pub const DICT: &[Mapping] = &[
+    Mapping("ñ", &["ene", "spanishn", "enye"]),
+    Mapping("Ñ", &["Ene", "spanishN", "Enye"]),
     Mapping("¨", &["uml", "umlaut"]),
     Mapping("ä", &["auml", "aumlaut"]),
     Mapping("Ä", &["Auml", "Aumlaut"]),
